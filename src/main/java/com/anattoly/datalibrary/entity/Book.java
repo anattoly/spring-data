@@ -1,28 +1,48 @@
 package com.anattoly.datalibrary.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "book")
-@AllArgsConstructor
-@Getter
-@Setter
+//@AllArgsConstructor
+@Data
 public class Book {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "book_seq_gen")
+    @SequenceGenerator(name = "book_seq_gen", sequenceName = "book_seq")
     private Long id;
-    @Column(name = "title", length = 100)
+
+    @NonNull
+    @Size(max = 100)
     private String title;
-    @Column(name = "title", length = 20)
+
+    @NonNull
+    @Size(max = 20)
     private String genre;
-    @Column(name = "title", length = 500)
+
+    @Size()
     private String description;
-    @Column(name = "rate")
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false)
+    @JsonBackReference
+    private Author author;
+
     private Float rate;
+
+    public Book(String title, String genre, String description, Author author, Float rate) {
+        this.title = title;
+        this.genre = genre;
+        this.description = description;
+        this.author = author;
+        this.rate = rate;
+    }
 
     public Book() {
     }
