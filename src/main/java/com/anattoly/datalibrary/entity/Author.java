@@ -4,11 +4,9 @@ package com.anattoly.datalibrary.entity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -36,6 +34,5 @@ public class Author {
     private Set<Book> book = new HashSet<>();
 
     public Author() {
-
     }
 }

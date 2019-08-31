@@ -1,7 +1,6 @@
 package com.anattoly.datalibrary.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.lang.NonNull;
 
@@ -10,7 +9,6 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "book")
-//@AllArgsConstructor
 @Data
 public class Book {
     @Id
@@ -34,9 +32,9 @@ public class Book {
     @JsonBackReference
     private Author author;
 
-    private Float rate;
+    private Double rate;
 
-    public Book(String title, String genre, String description, Author author, Float rate) {
+    public Book(String title, String genre, String description, Author author, Double rate) {
         this.title = title;
         this.genre = genre;
         this.description = description;

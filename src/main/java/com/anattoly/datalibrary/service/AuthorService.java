@@ -5,7 +5,6 @@ import com.anattoly.datalibrary.entity.Book;
 import com.anattoly.datalibrary.repository.IAuthorRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class AuthorService implements IAuthorService {
