@@ -1,7 +1,7 @@
 package com.anattoly.datalibrary.config;
 
-import com.anattoly.datalibrary.repository.IAuthorRepository;
-import com.anattoly.datalibrary.repository.IBookRepository;
+import com.anattoly.datalibrary.repository.library.IAuthorRepository;
+import com.anattoly.datalibrary.repository.library.IBookRepository;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 

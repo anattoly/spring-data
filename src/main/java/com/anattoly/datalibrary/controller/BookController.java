@@ -1,9 +1,9 @@
 package com.anattoly.datalibrary.controller;
 
-import com.anattoly.datalibrary.entity.Book;
+import com.anattoly.datalibrary.entity.library.Book;
 import com.anattoly.datalibrary.exeption.ResourceNotFoundExeption;
-import com.anattoly.datalibrary.repository.IAuthorRepository;
-import com.anattoly.datalibrary.repository.IBookRepository;
+import com.anattoly.datalibrary.repository.library.IAuthorRepository;
+import com.anattoly.datalibrary.repository.library.IBookRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

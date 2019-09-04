@@ -1,8 +1,8 @@
 package com.anattoly.datalibrary.controller;
 
-import com.anattoly.datalibrary.entity.Author;
+import com.anattoly.datalibrary.entity.library.Author;
 import com.anattoly.datalibrary.exeption.ResourceNotFoundExeption;
-import com.anattoly.datalibrary.repository.IAuthorRepository;
+import com.anattoly.datalibrary.repository.library.IAuthorRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
