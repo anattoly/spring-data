@@ -22,13 +22,13 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "user_name", nullable = false, unique = true)
-    private String name;
+    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "ROLE", joinColumns = @JoinColumn(name = "user_id"))
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
