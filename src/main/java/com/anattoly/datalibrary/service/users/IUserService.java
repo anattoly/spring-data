@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface IUserService {
 
-    void addUser(User user);
+    void saveUser(User user);
 
     void deleteByUsername(String username);
 

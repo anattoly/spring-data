@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Long> {
+public interface IUserRepo extends JpaRepository<User, Long> {
 
     Optional<User> getUserById(Long id);
 

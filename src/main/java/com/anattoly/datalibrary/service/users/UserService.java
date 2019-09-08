@@ -1,7 +1,7 @@
 package com.anattoly.datalibrary.service.users;
 
 import com.anattoly.datalibrary.entity.security.User;
-import com.anattoly.datalibrary.repository.user.UserRepo;
+import com.anattoly.datalibrary.repository.user.IUserRepo;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,43 +12,42 @@ import java.util.Optional;
 @Service
 public class UserService implements IUserService, UserDetailsService {
 
-    private final UserRepo userRepo;
+    private final IUserRepo IUserRepo;
 
-    public UserService(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public UserService(IUserRepo IUserRepo) {
+        this.IUserRepo = IUserRepo;
     }
 
-    @Override
-    public void addUser(User user) {
-        userRepo.save(user);
+    public void saveUser(User user) {
+        IUserRepo.save(user);
     }
 
     @Override
     public void deleteByUsername(String username) {
-        userRepo.deleteByUsername(username);
+        IUserRepo.deleteByUsername(username);
     }
 
     @Override
     public boolean existsByUsername(String username) {
-        return userRepo.existsByUsername(username);
+        return IUserRepo.existsByUsername(username);
     }
 
     @Override
     public Optional<User> getByUserId(Long id) {
-        return userRepo.getUserById(id).isPresent()
-                ? userRepo.getUserById(id)
+        return IUserRepo.getUserById(id).isPresent()
+                ? IUserRepo.getUserById(id)
                 : Optional.empty();
     }
 
     @Override
     public Optional<User> findByUsername(String username) {
-        return userRepo.findByUsername(username).isPresent()
-                ? userRepo.findByUsername(username)
+        return IUserRepo.findByUsername(username).isPresent()
+                ? IUserRepo.findByUsername(username)
                 : Optional.empty();
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return userRepo.findByUsername(s).get();
+        return IUserRepo.findByUsername(s).get();
     }
 }
