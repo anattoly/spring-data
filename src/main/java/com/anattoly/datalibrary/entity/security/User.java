@@ -3,14 +3,12 @@ package com.anattoly.datalibrary.entity.security;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,6 +35,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
+    public User() {
+
+    }
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -48,31 +50,31 @@ public class User implements UserDetails {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.name())).collect(Collectors.toList());
     }
 
-    @JsonIgnore
+
     @Override
     public String getUsername() {
         return null;
     }
 
-    @JsonIgnore
+
     @Override
     public boolean isAccountNonExpired() {
         return false;
     }
 
-    @JsonIgnore
+
     @Override
     public boolean isAccountNonLocked() {
         return false;
     }
 
-    @JsonIgnore
+
     @Override
     public boolean isCredentialsNonExpired() {
         return false;
     }
 
-    @JsonIgnore
+
     @Override
     public boolean isEnabled() {
         return false;

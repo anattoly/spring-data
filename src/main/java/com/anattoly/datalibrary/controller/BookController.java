@@ -21,7 +21,7 @@ public class BookController {
         this.authorRepository = authorRepository;
     }
 
-    @PostMapping("/authors/{authorId}")
+    @PostMapping("/add/{authorId}")
     public Book addBook(@PathVariable(value = "authorId") Long authorId, @RequestBody Book book) {
         return authorRepository.findById(authorId).map(author -> {
             book.setAuthor(author);
@@ -29,9 +29,9 @@ public class BookController {
         }).orElseThrow(() -> new ResourceNotFoundExeption("Author Id " + authorId + "not found"));
     }
 
-    @DeleteMapping("/{bookId}/authors/{authorId}")
+    @DeleteMapping("/delete/{bookId}/authors/{authorId}")
     public ResponseEntity<?> deleteBook(@PathVariable(value = "authorId") Long authorId,
-                                           @PathVariable(value = "bookId") Long bookId) {
+                                        @PathVariable(value = "bookId") Long bookId) {
         return bookRepository.findByIdAndAuthorId(bookId, authorId).map(book -> {
             bookRepository.deleteById(bookId);
             return ResponseEntity.ok().build();
@@ -51,8 +51,8 @@ public class BookController {
 
     @PutMapping("/{bookId}/authors/{authorId}")
     public ResponseEntity<?> updateBook(@PathVariable(value = "bookId") Long bookId,
-                           @PathVariable(value = "authorId") Long authorId,
-                           @RequestBody Book book) {
+                                        @PathVariable(value = "authorId") Long authorId,
+                                        @RequestBody Book book) {
         return bookRepository.findByIdAndAuthorId(bookId, authorId).map(b -> {
             bookRepository.deleteById(bookId);
             bookRepository.save(book);

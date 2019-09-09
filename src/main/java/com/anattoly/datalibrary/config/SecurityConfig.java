@@ -1,7 +1,9 @@
 package com.anattoly.datalibrary.config;
 
+import com.anattoly.datalibrary.service.users.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -15,31 +17,34 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Autowired
     public void configure(AuthenticationManagerBuilder builder) throws Exception {
         builder.inMemoryAuthentication()
                 .withUser("anattoly")
                 .password(passwordEncoder().encode("anattoly"))
-                .roles("USER", "ADMIN");
-    }
+                .roles("USER");
 
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/", "/**").hasAnyRole("ADMIN")//.permitAll()
-                .antMatchers("/admin/**").hasAnyRole("ADMIN")
-                .antMatchers("/users/**").hasAnyRole("USER")
+                .antMatchers("**/registration").permitAll()
+                .antMatchers("**/add/**", "**/delete/**", "**/search/***").hasAnyRole("ADMIN")
+                .antMatchers("library/books/**", "library/author/**").hasAnyRole("USER")
                 .anyRequest().authenticated();
 
-        http.formLogin()
+        http.authorizeRequests().anyRequest().authenticated()
                 .and()
                 .httpBasic();
 

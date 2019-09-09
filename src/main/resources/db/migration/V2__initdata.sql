@@ -1,3 +1,9 @@
+INSERT INTO USERS(user_id, user_name, password)
+VALUES (1, 'anattoly', 'anattoly');
+
+INSERT INTO USER_ROLE (user_id, roles)
+VALUES (1, 'ADMIN');
+
 INSERT INTO AUTHOR (id, first_name, last_name)
 VALUES (nextval('author_seq'), 'Suzanne', 'Collins');
 INSERT INTO BOOK (author_id, id, title, genre, description, rate)
